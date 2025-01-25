@@ -1,14 +1,18 @@
 from fastapi import Depends, HTTPException, status
 from datetime import timedelta, datetime, timezone
+from dotenv import load_dotenv
 from jwt.exceptions import PyJWTError
 from app.schemas.auth_schema import DataToken
 from app.db.users import get_user
 from .common import oauth2_schema
 import jwt
+import os
 
-SECRET_KEY = '09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7'
-ALGORITHM = 'HS256'
-ACCESS_TOKEN_EXPIRE = 30
+load_dotenv()
+
+SECRET_KEY = os.getenv('SECRET_KEY')
+ALGORITHM = os.getenv('ALGORITHM')
+ACCESS_TOKEN_EXPIRE = os.getenv('ACCESS_TOKEN_EXPIRE')
 
 def create_access_token(data: dict, expire_delta: timedelta | None = None):
     payload = data.copy()

@@ -7,12 +7,12 @@ async def db_connect(test=False):
         try:
             return conn
         except Exception as e:
-            return e
+            return str(e)
     else:
         conn = await asyncpg.connect(user=os.getenv('DB_USER'), password=os.getenv('DB_PASSWORD'), database=os.getenv('DATABASE'), host=os.getenv('BD_HOST'), port=os.getenv('DB_PORT'))
         try:
             return conn
         except Exception as e:
-            return e
+            return str(e)
         # finally:
         #     await conn.close()

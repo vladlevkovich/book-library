@@ -24,7 +24,7 @@ async def add_user(email: str, password: str, test: Optional[bool] = False):
             INSERT INTO users (email, password) VALUES ($1, $2) ON CONFLICT (email) DO NOTHING RETURNING id
         """, email, password)
     except Exception as e:
-        return e
+        return {'error': str(e)}
 
 async def get_user(user_email, test: Optional[bool] = False):
     try:
@@ -33,6 +33,6 @@ async def get_user(user_email, test: Optional[bool] = False):
             SELECT * FROM users WHERE email = $1
         """, user_email)
     except Exception as e:
-        return e
+        return {'error': str(e)}
 
 
