@@ -2,6 +2,7 @@ from typing import Optional
 from .db_connect import db_connect
 import asyncpg
 
+
 async def init_books_db():
     try:
         conn = await asyncpg.connect(user='postgres', password='admin', database='books', host='localhost', port=5432)
@@ -87,9 +88,6 @@ async def get_filtered_books(author_name=None, genre=None, year_from=None, year_
 async def book_retrieve(book_id: int, test: bool):
     try:
         conn = await db_connect(test)
-        # return await conn.fetchrow("""
-        #     SELECT * FROM books WHERE id=$1
-        # """, book_id)
         query = """
                     SELECT books.id, books.title, books.published_year, books.genre, 
                     books.created_at, books.updated_at, authors.name AS author_name
@@ -151,3 +149,4 @@ async def book_delete(book_id: int, test: bool):
     except Exception as e:
         print(f'ERROR: {e}')
         return e
+
