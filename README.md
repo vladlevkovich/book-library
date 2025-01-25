@@ -11,9 +11,9 @@ Setup project
 ## 1. CLone repository
 
 ```bash
-git clone https://github.com/your-username/your-project.git
+git clone https://github.com/vladlevkovich/book-library.git
 ```
-cd your_project
+cd book-library
 
 ## 2. Create and activate virtual environment
 ```bash
