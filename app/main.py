@@ -2,11 +2,14 @@ from fastapi import FastAPI, HTTPException, status, Request
 from contextlib import asynccontextmanager
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
+from dotenv import load_dotenv
 from app.utils.limiter import limiter
 from .routers import users, books
 from app.db.books import init_books_db
 from app.db.users import init_users_db
 import asyncio
+
+load_dotenv()
 
 @asynccontextmanager
 async def on_startup(app: FastAPI):
